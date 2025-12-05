@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+
+require "easy_broker/api_client"
+require "easy_broker/property_fetcher"
+require "easy_broker/property_title_printer"
+
+API_KEY = ENV.fetch("EASYBROKER_API_KEY", "l7u502p8v46ba3ppgvj5y2aad50lb9")
+
+api_client = EasyBroker::ApiClient.new(api_key: API_KEY)
+property_fetcher = EasyBroker::PropertyFetcher.new(api_client: api_client)
+printer = EasyBroker::PropertyTitlePrinter.new(property_fetcher: property_fetcher)
+printer.call
